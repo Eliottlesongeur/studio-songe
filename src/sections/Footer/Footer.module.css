@@ -1,0 +1,124 @@
+/* =============================================================
+   Footer — pied de page global (porté de Relume Footer4).
+   Mobile-first : tout centré et empilé. ≥1024px : logo / nav / réseaux
+   sur une ligne. Breakpoints DS : md = 768px, lg = 1024px.
+   ============================================================= */
+
+.footer {
+  background: var(--ss-color-bg);
+  padding-block: var(--ss-space-9);
+}
+
+.inner {
+  max-width: var(--ss-container);
+  margin-inline: auto;
+  padding-inline: var(--ss-gutter);
+}
+
+/* ---------- Bandeau haut ---------- */
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ss-space-8);
+  padding-bottom: var(--ss-space-8);
+  text-align: center;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ss-space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--ss-space-4);
+}
+
+.social {
+  display: inline-flex;
+  color: var(--ss-color-text);
+  transition: color var(--ss-duration-fast) var(--ss-ease);
+}
+
+.social:hover {
+  color: var(--ss-color-accent);
+}
+
+/* ---------- Filet ---------- */
+.divider {
+  height: var(--ss-line-weight);
+  margin: 0;
+  border: 0;
+  background: var(--ss-color-border-soft);
+}
+
+/* ---------- Bandeau bas ---------- */
+.bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--ss-space-5);
+  padding-top: var(--ss-space-6);
+  text-align: center;
+}
+
+.copy {
+  margin: 0;
+}
+
+.legal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ss-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- ≥ 768px : bas sur une ligne ---------- */
+@media (min-width: 768px) {
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: var(--ss-space-7);
+  }
+  .legal {
+    flex-direction: row;
+    gap: var(--ss-space-6);
+  }
+}
+
+/* ---------- ≥ 1024px : haut sur une ligne ---------- */
+@media (min-width: 1024px) {
+  .top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--ss-space-6);
+    padding-bottom: var(--ss-space-9);
+    text-align: left;
+  }
+  .logo {
+    justify-self: start;
+  }
+  .navList {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--ss-space-7);
+  }
+  .socials {
+    justify-self: end;
+  }
+}

@@ -1,0 +1,44 @@
+.filters {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--ss-space-2);
+}
+
+.pill {
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-medium);
+  font-size: var(--ss-size-body-sm);
+  letter-spacing: var(--ss-tracking-caps-sm);
+  text-transform: uppercase;
+  color: var(--ss-color-text-muted);
+  background: transparent;
+  border: 1px solid var(--ss-color-border-soft);
+  border-radius: var(--ss-radius-pill);
+  padding: 0.5rem 1.15rem;
+  cursor: pointer;
+  transition:
+    color var(--ss-duration) var(--ss-ease),
+    background-color var(--ss-duration) var(--ss-ease),
+    border-color var(--ss-duration) var(--ss-ease);
+}
+
+.pill:hover:not(.active) {
+  color: var(--ss-color-text);
+  border-color: var(--ss-color-border);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 2px;
+}
+
+.active {
+  color: var(--ss-color-on-accent);
+  background: var(--ss-color-accent);
+  border-color: var(--ss-color-accent);
+}
+
+.active:hover {
+  background: var(--ss-color-accent-hover);
+  border-color: var(--ss-color-accent-hover);
+}

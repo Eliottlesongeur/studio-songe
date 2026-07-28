@@ -1,0 +1,76 @@
+.heading {
+  margin: 0;
+  font-family: var(--ss-font-title);
+  color: var(--ss-color-text);
+  line-height: var(--ss-leading-tight);
+  text-wrap: balance;
+}
+
+/* --- Titres : capitales très aérées (charte hero/section) --- */
+.hero,
+.section {
+  text-transform: uppercase;
+  letter-spacing: var(--ss-tracking-caps);
+}
+
+.hero {
+  font-size: var(--ss-size-hero); /* 50.5px */
+}
+.section {
+  font-size: var(--ss-size-section); /* 37.9px */
+}
+
+/* --- Sous-titres : Garet minuscule, tracking resserré (charte) --- */
+.sous-titre {
+  font-size: var(--ss-size-sous-titre); /* 28.4px */
+  letter-spacing: var(--ss-tracking-title);
+}
+.mineur {
+  font-size: var(--ss-size-mineur); /* 21.3px */
+  letter-spacing: var(--ss-tracking-title);
+}
+
+/* --- Graisses (bold réservé à hero/section, cf. composant) --- */
+.light {
+  font-weight: var(--ss-font-weight-light);
+}
+.bold {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+/* Sous-titres (rôle H3) en Garet Regular plutôt que Light : un peu plus
+   présents. Sélecteur 0-2-0 pour battre `.light` (le composant les rend
+   toujours en « light »). */
+.sous-titre.light {
+  font-weight: var(--ss-font-weight-regular);
+}
+
+/* --- Couleurs --- */
+.tone-default {
+  color: var(--ss-color-text);
+}
+.tone-inverse {
+  color: var(--ss-color-text-inverse);
+}
+.tone-accent {
+  color: var(--ss-color-accent);
+}
+
+/* --- Alignement --- */
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+
+/* Capitales très aérées : le tracking décale le dernier glyphe ;
+   on le compense pour un centrage optique correct. */
+.hero.align-center,
+.section.align-center {
+  text-indent: var(--ss-tracking-caps);
+}
+
+/* Plus de palier responsive ici : les tailles hero/section/sous-titre sont
+   désormais fluides (var(--ss-fluid-unit) dans les tokens), elles se réduisent
+   en continu avec la largeur d'écran. */

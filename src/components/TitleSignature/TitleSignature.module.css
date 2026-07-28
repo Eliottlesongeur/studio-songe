@@ -1,0 +1,23 @@
+.wrap {
+  display: inline-flex;
+}
+
+.align-bottom {
+  align-items: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* L'arche est en fond ; le titre passe au-dessus de son bord droit. */
+.arch {
+  position: relative;
+  z-index: 0;
+  flex: none;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+}

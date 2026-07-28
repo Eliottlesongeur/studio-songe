@@ -1,0 +1,71 @@
+/* Pages légales (mentions légales, politique de confidentialité) — mise en
+   page sobre, colonne de lecture centrée. Réutilisé par les deux routes. */
+
+.page {
+  /* clippe un éventuel débord (cohérent avec les autres pages). */
+  overflow-x: clip;
+}
+
+.wrap {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.retour {
+  display: inline-block;
+  margin-bottom: var(--ss-space-6);
+  color: var(--ss-color-text-muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.retour:hover {
+  color: var(--ss-color-text);
+}
+
+.titre {
+  margin-bottom: var(--ss-space-3);
+}
+
+.maj {
+  margin-bottom: var(--ss-space-8);
+  color: var(--ss-color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Un article = un titre + du texte. */
+.bloc {
+  margin-bottom: var(--ss-space-7);
+}
+
+.blocTitre {
+  margin-bottom: var(--ss-space-3);
+}
+
+/* Paragraphes et listes de la colonne de lecture. */
+.bloc p {
+  margin-bottom: var(--ss-space-3);
+  color: var(--ss-color-text-muted);
+  line-height: 1.7;
+}
+
+.liste {
+  margin: 0 0 var(--ss-space-3);
+  padding-left: 1.25rem;
+}
+.liste li {
+  margin-bottom: var(--ss-space-2);
+  color: var(--ss-color-text-muted);
+  line-height: 1.7;
+}
+
+.bloc a {
+  color: var(--ss-color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contact {
+  font-style: normal;
+  color: var(--ss-color-text-muted);
+  line-height: 1.7;
+}

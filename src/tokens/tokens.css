@@ -1,0 +1,182 @@
+/* =============================================================
+   Studio Songe — Design Tokens
+   Source : Charte Graphique Studio Songe V2 (Canva)
+   Positionnement : sobre, élégant, premium, épuré.
+
+   Convention de nommage :
+   --ss-<catégorie>-<rôle>
+   Les tokens "primitifs" (couleurs brutes) ne devraient PAS être
+   utilisés directement dans les composants : préférez les tokens
+   sémantiques (--ss-color-bg, --ss-color-text, …).
+
+   -------------------------------------------------------------
+   BREAKPOINTS (convention — alignés Relume / Tailwind)
+   Les custom properties CSS ne fonctionnent pas dans les
+   conditions @media : ces valeurs sont donc une CONVENTION à
+   recopier telle quelle dans les .module.css. Approche mobile-first
+   (styles de base = mobile, on surcharge en `min-width`).
+
+     sm : 640px   — grand mobile / petite tablette
+     md : 768px   — tablette
+     lg : 1024px  — desktop
+     xl : 1280px  — grand desktop
+
+   Ex. :
+     .grid { grid-template-columns: 1fr; }             // mobile
+     @media (min-width: 768px) { .grid { ... 2 cols } } // md
+     @media (min-width: 1024px){ .grid { ... 3 cols } } // lg
+   ============================================================= */
+
+:root {
+  /* ---------------------------------------------------------
+     1. COULEURS — primitives (palette charte, page 11)
+     --------------------------------------------------------- */
+  --ss-palette-ivoire: #fffbf8; /* Ivoire très clair  — RGB 255 251 248 */
+  --ss-palette-terracotta: #a85c3c; /* Terracotta      — RGB 168 92 60   */
+  --ss-palette-brun: #4a3f36; /* Brun foncé      — RGB 74 63 54    */
+  --ss-palette-gris: #ebebeb; /* Gris clair      — RGB 235 235 235 */
+  --ss-palette-sauge: #5a8c55; /* Vert sauge      — RGB 90 140 85   */
+
+  /* Nuances dérivées (générées, non dans la charte — pour états UI) */
+  --ss-palette-terracotta-600: #8f4c31; /* hover CTA plein */
+  --ss-palette-terracotta-050: #f3e4dc; /* fond très clair terracotta */
+
+  /* ---------------------------------------------------------
+     2. COULEURS — sémantiques (à utiliser dans les composants)
+     --------------------------------------------------------- */
+  --ss-color-bg: var(--ss-palette-ivoire); /* fond de page */
+  --ss-color-bg-alt: var(--ss-palette-brun); /* sections foncées */
+  --ss-color-surface: var(--ss-palette-gris); /* cartes, surfaces neutres */
+
+  --ss-color-text: var(--ss-palette-brun); /* texte principal */
+  --ss-color-text-muted: #6f6357; /* texte secondaire (brun éclairci) */
+  --ss-color-text-inverse: var(--ss-palette-ivoire); /* texte sur fond foncé */
+
+  --ss-color-accent: var(--ss-palette-terracotta); /* CTA, marqueurs, actif */
+  --ss-color-accent-hover: var(--ss-palette-terracotta-600);
+  --ss-color-accent-soft: var(--ss-palette-terracotta-050);
+  --ss-color-on-accent: var(--ss-palette-ivoire); /* texte sur terracotta */
+
+  --ss-color-line: var(--ss-palette-sauge); /* lignes fines décoratives (signature) */
+  --ss-color-border: var(--ss-palette-brun); /* bordures de contenu */
+  --ss-color-border-soft: rgba(74, 63, 54, 0.16); /* séparateurs discrets */
+
+  --ss-color-focus: var(--ss-palette-sauge); /* anneau de focus accessibilité */
+  --ss-color-focus-ring: rgba(90, 140, 85, 0.18); /* halo focus (sauge) */
+  --ss-color-error-ring: rgba(168, 92, 60, 0.18); /* halo focus erreur (terracotta) */
+
+  /* Sur fond foncé — ivoire + transparence (liens, ghost, bordures) */
+  --ss-color-on-dark: rgba(255, 251, 248, 0.78); /* texte / lien atténué */
+  --ss-color-on-dark-hover: rgba(255, 251, 248, 0.8); /* survol */
+  --ss-color-on-dark-border: rgba(255, 251, 248, 0.5); /* bordure ghost */
+  --ss-color-on-dark-fill: rgba(255, 251, 248, 0.08); /* fond ghost léger */
+
+  /* Dégradés — construits uniquement sur des couleurs charte */
+  --ss-gradient-placeholder: linear-gradient(
+    180deg,
+    var(--ss-color-bg) 0%,
+    var(--ss-color-accent-soft) 100%
+  ); /* fond de média sans image (ProjectCard) */
+
+  /* ---------------------------------------------------------
+     3. TYPOGRAPHIE (page 12-13)
+     --------------------------------------------------------- */
+  --ss-font-title: "Garet", "Century Gothic", system-ui, sans-serif;
+  --ss-font-body: "Work Sans", system-ui, -apple-system, sans-serif;
+
+  --ss-font-weight-light: 300;
+  --ss-font-weight-regular: 400; /* Garet Regular — CTA appuyé sans gras plein */
+  --ss-font-weight-medium: 500;
+  --ss-font-weight-bold: 700;
+
+  /* Interlignes — charte : titres 1.13 */
+  --ss-leading-tight: 1.13; /* titres (H1→H3) */
+  --ss-leading-snug: 1.35;
+  --ss-leading-normal: 1.6; /* corps de texte */
+
+  /* Tracking (letter-spacing)
+     Charte : titres capitales +400 (≈ 0.4em, valeurs Canva/1000)
+              sous-titres Garet minuscule -25 (≈ -0.025em)          */
+  --ss-tracking-caps: 0.4em; /* titres capitales très aérés */
+  --ss-tracking-caps-sm: 0.18em; /* capitales sur petits textes (labels, nav) */
+  --ss-tracking-title: -0.025em; /* Garet minuscule (H3, sous-titres) */
+  --ss-tracking-body: 0; /* corps Work Sans */
+
+  /* Échelle typographique — Perfect Fourth (ratio 1.333, base 16px).
+     Titres FLUIDES : une seule unité en clamp (0.78rem sur petits écrans →
+     1rem à partir de ~1240px), et chaque titre = unité × son multiplicateur.
+     Le ratio est donc préservé À TOUTES les largeurs (tout scale du même
+     facteur), et à ≥1240px on retrouve pile les tailles cibles ci-dessous. */
+  --ss-fluid-unit: clamp(0.78rem, 0.69rem + 0.4vw, 1rem);
+  --ss-size-hero: calc(var(--ss-fluid-unit) * 3.157); /* ≤ 50.5px */
+  --ss-size-section: calc(var(--ss-fluid-unit) * 2.125); /* ≤ 34px */
+  --ss-size-sous-titre: calc(var(--ss-fluid-unit) * 1.777); /* ≤ 28.4px */
+  --ss-size-mineur: calc(var(--ss-fluid-unit) * 1.333); /* ≤ 21.3px */
+  --ss-size-body: 1rem; /* 16px — p (base) */
+  --ss-size-caption: 0.75rem; /* 12px — caption */
+
+  /* Tailles utilitaires HORS échelle modulaire (confort de lecture) :
+     lead paragraphs & textes secondaires. Volontairement hors grille. */
+  --ss-size-body-lg: 1.125rem; /* 18px — lead / intro */
+  --ss-size-body-sm: 0.875rem; /* 14px — texte secondaire */
+
+  /* ---------------------------------------------------------
+     4. ESPACEMENTS — échelle base 4px
+     --------------------------------------------------------- */
+  --ss-space-0: 0;
+  --ss-space-1: 0.25rem; /* 4  */
+  --ss-space-2: 0.5rem; /* 8  */
+  --ss-space-3: 0.75rem; /* 12 */
+  --ss-space-4: 1rem; /* 16 */
+  --ss-space-5: 1.5rem; /* 24 */
+  --ss-space-6: 2rem; /* 32 */
+  --ss-space-7: 3rem; /* 48 */
+  --ss-space-8: 4rem; /* 64 */
+  --ss-space-9: 6rem; /* 96 */
+
+  /* ---------------------------------------------------------
+     5. RAYONS — la charte joue les formes en arche + coins doux
+     --------------------------------------------------------- */
+  --ss-radius-xs: 4px;
+  --ss-radius-sm: 8px; /* boutons */
+  --ss-radius-md: 16px; /* champs, petites cartes */
+  --ss-radius-lg: 28px; /* cartes, images */
+  --ss-radius-xl: 48px; /* grands blocs, arches douces */
+  --ss-radius-pill: 999px; /* pills / onglets actifs */
+  --ss-radius-arch: 50% 50% 0 0 / 38% 38% 0 0; /* arche : dôme en haut, bas carré (ProjectCard) */
+
+  /* ---------------------------------------------------------
+     6. OMBRES — charte : discrètes, jamais marquées (Do/Don'ts p.14)
+     --------------------------------------------------------- */
+  --ss-shadow-none: none;
+  --ss-shadow-sm: 0 1px 2px rgba(74, 63, 54, 0.06);
+  --ss-shadow-md: 0 8px 24px rgba(74, 63, 54, 0.08);
+  --ss-shadow-lg: 0 20px 48px rgba(74, 63, 54, 0.1);
+
+  /* ---------------------------------------------------------
+     7. TRAITS & MOTION
+     --------------------------------------------------------- */
+  --ss-line-weight: 1px; /* lignes signature (vert sauge) */
+  --ss-border-weight: 1.5px; /* contours boutons / cartes */
+
+  --ss-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ss-duration-fast: 140ms;
+  --ss-duration: 220ms;
+  --ss-duration-slow: 360ms;
+
+  /* ---------------------------------------------------------
+     8. LAYOUT
+     --------------------------------------------------------- */
+  /* Largeurs max de contenu */
+  --ss-container: 1200px;
+  --ss-container-narrow: 760px; /* texte / lecture */
+  --ss-container-wide: 1400px;
+
+  /* Gouttière latérale (Container) — fluide */
+  --ss-gutter: clamp(1.25rem, 5vw, 3rem);
+
+  /* Rythme vertical des sections (padding-block) — fluide */
+  --ss-section-sm: clamp(2rem, 4vw, 3rem);
+  --ss-section-md: clamp(3.5rem, 7vw, 6rem);
+  --ss-section-lg: clamp(5rem, 10vw, 9rem);
+}

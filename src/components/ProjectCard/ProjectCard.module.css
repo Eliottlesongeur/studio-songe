@@ -1,0 +1,152 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-4);
+  text-decoration: none;
+  color: var(--ss-color-text);
+  isolation: isolate;
+}
+
+/* --- Filet fin décalé qui suit l'arche (double trait signature) --- */
+.frame {
+  padding: var(--ss-space-2);
+  border: var(--ss-line-weight) solid var(--frame-color, var(--ss-color-accent));
+  border-radius: var(--ss-radius-arch);
+}
+
+.frameTone-accent {
+  --frame-color: var(--ss-color-accent);
+}
+.frameTone-border {
+  --frame-color: var(--ss-color-border);
+}
+.frameTone-line {
+  --frame-color: var(--ss-color-line);
+}
+
+/* --- Filet « songe » : tracé SVG de la silhouette (le border ne peut pas
+   suivre un masque), décalé par le padding pour le double trait. --- */
+.frameSonge {
+  position: relative;
+  padding: var(--ss-space-2);
+}
+
+.songeOutline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--frame-color, var(--ss-color-accent));
+  pointer-events: none;
+}
+
+.songeOutline path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ss-line-weight);
+  vector-effect: non-scaling-stroke;
+}
+
+/* --- Média masqué en arche (forme signature charte p.19) --- */
+.media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--ss-radius-arch);
+  /* placeholder chaleureux si pas d'image */
+  background: var(--ss-gradient-placeholder);
+}
+
+/* --- Masque « songe » : silhouette signature (ratio du SVG source) --- */
+.songe {
+  aspect-ratio: 438 / 818;
+  border-radius: 0;
+}
+
+/* --- Encadré éditorial : photo en cadre arche (dôme doux, base carrée) à
+   double filet. Le média porte le filet INTÉRIEUR (border), le wrapper
+   `.encadreFrameDouble` ajoute le filet EXTÉRIEUR décalé. --- */
+.encadreMedia {
+  border: var(--ss-line-weight) solid var(--frame-color, var(--ss-color-line));
+  border-radius: var(--ss-radius-xl) var(--ss-radius-xl) 0 0;
+}
+
+.encadreFrame {
+  display: block;
+}
+
+/* filet extérieur décalé (n'apparaît que si `frame` = true) */
+.encadreFrameDouble {
+  padding: var(--ss-space-2);
+  border: var(--ss-line-weight) solid var(--frame-color);
+  /* rayon extérieur = rayon média + décalage → filets concentriques */
+  border-radius: calc(var(--ss-radius-xl) + var(--ss-space-2))
+    calc(var(--ss-radius-xl) + var(--ss-space-2)) 0 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--ss-duration-slow) var(--ss-ease);
+}
+
+.card:hover .image {
+  transform: scale(1.035);
+}
+
+/* --- Pied : texte + flèche --- */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ss-space-4);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-1);
+  min-width: 0;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: var(--ss-tracking-caps-sm);
+}
+
+/* --- Flèche : carré contour terracotta (charte p.22) --- */
+.arrow {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: var(--ss-border-weight) solid var(--ss-color-accent);
+  border-radius: var(--ss-radius-sm);
+  color: var(--ss-color-accent);
+  transition:
+    background-color var(--ss-duration) var(--ss-ease),
+    color var(--ss-duration) var(--ss-ease),
+    transform var(--ss-duration) var(--ss-ease);
+}
+
+.arrow svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: block;
+}
+
+.card:hover .arrow {
+  background: var(--ss-color-accent);
+  color: var(--ss-color-on-accent);
+  transform: translateX(2px);
+}
+
+/* Focus visible quand la carte est un lien */
+.card:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 4px;
+  border-radius: var(--ss-radius-xs);
+}

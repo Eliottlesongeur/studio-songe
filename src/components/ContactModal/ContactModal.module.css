@@ -1,0 +1,137 @@
+/* ContactModal — pop-up de contact (dialog natif). ------------------------- */
+
+.dialog {
+  width: min(34rem, calc(100vw - 2 * var(--ss-space-4)));
+  max-height: calc(100dvh - 2 * var(--ss-space-5));
+  margin: auto; /* centre le dialog dans le viewport */
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ss-color-text);
+  overflow: visible;
+}
+
+/* Fond assombri derrière le pop-up. */
+.dialog::backdrop {
+  background: rgba(74, 63, 54, 0.5); /* brun charte, translucide */
+  backdrop-filter: blur(2px);
+}
+
+/* Animation d'entrée (ouverture uniquement). */
+.dialog[open] {
+  animation: modal-in var(--ss-duration) ease both;
+}
+.dialog[open]::backdrop {
+  animation: backdrop-in var(--ss-duration) ease both;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open],
+  .dialog[open]::backdrop {
+    animation: none;
+  }
+}
+
+/* Panneau (carte blanche). --------------------------------------------------- */
+.panel {
+  position: relative;
+  max-height: inherit;
+  padding: clamp(var(--ss-space-6), 5vw, var(--ss-space-8))
+    clamp(var(--ss-space-5), 4vw, var(--ss-space-7));
+  background: var(--ss-color-bg);
+  border-radius: var(--ss-radius-lg);
+  box-shadow: var(--ss-shadow-lg);
+  overflow-y: auto;
+}
+
+/* Bouton de fermeture. ------------------------------------------------------- */
+.close {
+  position: absolute;
+  top: var(--ss-space-4);
+  right: var(--ss-space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  color: var(--ss-color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--ss-radius-pill);
+  cursor: pointer;
+  transition:
+    color var(--ss-duration-fast) ease,
+    background-color var(--ss-duration-fast) ease;
+}
+.close:hover {
+  color: var(--ss-color-text);
+  background: var(--ss-color-border-soft);
+}
+.close:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 2px;
+}
+
+/* En-tête + états. ----------------------------------------------------------- */
+.head {
+  display: grid;
+  gap: var(--ss-space-2);
+  margin-bottom: var(--ss-space-5);
+  padding-right: var(--ss-space-7); /* dégage la croix de fermeture */
+}
+.title {
+  margin: 0;
+}
+
+.state {
+  display: grid;
+  gap: var(--ss-space-4);
+  padding: var(--ss-space-5) 0;
+  text-align: center;
+}
+.state .actions {
+  justify-content: center;
+}
+
+/* Formulaire. ---------------------------------------------------------------- */
+.form {
+  display: grid;
+  gap: var(--ss-space-4);
+}
+.actions {
+  display: flex;
+  margin-top: var(--ss-space-2);
+}
+.error {
+  color: var(--ss-color-accent);
+}
+
+/* Honeypot anti-spam — hors flux et invisible. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

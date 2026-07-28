@@ -1,0 +1,131 @@
+/* =============================================================
+   Approche — porté de Relume Layout353 (colonne gauche collante +
+   cartes-principes empilées en sticky). Mobile-first : une colonne.
+   Bureau (≥ 768px) : deux colonnes, la gauche collante. Breakpoint
+   DS : md = 768px.
+   ============================================================= */
+
+/* Transitions resserrées. `.section[id]` = spécificité 0-2-0 pour battre
+   `.spacing-lg` (0-1-0), non réductible par le minifieur.
+   - haut : joint avec Vision (serré)
+   - bas : joint avec Réalisations (un peu plus d'air, demande Sasha) */
+.section[id] {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(4.25rem, 7vw, 6rem);
+}
+
+/* Hauteur de fixation des cartes (base mobile ; surchargée en bureau). */
+.layout {
+  --approche-carte-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-8);
+}
+
+/* ---------- Colonne gauche ---------- */
+.surtitre {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+}
+
+/* Titre deux lignes façon Hero/Vision : 1re ligne light, 2e ligne bold. */
+.titre {
+  margin-bottom: var(--ss-space-5);
+  text-wrap: balance;
+}
+
+.ligne {
+  display: block;
+}
+
+.fort {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+.description {
+  max-width: 32rem;
+}
+
+.actions {
+  margin-top: var(--ss-space-6);
+}
+
+/* ---------- Colonne droite : pile de cartes ---------- */
+.cartes {
+  display: flex;
+  flex-direction: column;
+}
+
+.carte {
+  position: sticky;
+  top: var(--approche-carte-top);
+  margin-bottom: var(--ss-space-6);
+  padding: var(--ss-space-6);
+  background: var(--ss-color-bg);
+  border: var(--ss-line-weight) solid var(--ss-color-border-soft);
+  border-radius: var(--ss-radius-lg);
+  box-shadow: var(--ss-shadow-md);
+}
+
+.numero {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+  font-family: var(--ss-font-body);
+  font-size: 1.5rem;
+  font-weight: var(--ss-font-weight-bold);
+  color: var(--ss-color-accent);
+}
+
+.icone {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+  color: var(--ss-color-line); /* vert sauge (signature) plutôt que l'accent terracotta */
+}
+
+.carteTitre {
+  margin-bottom: var(--ss-space-3);
+}
+
+/* Préserve les retours à la ligne de la copie (résumé + liste de livrables). */
+.carteDesc {
+  white-space: pre-line;
+}
+
+/* Mobile (< 768px) : titre, description et CTA centrés (demande Sasha).
+   Sélecteur `.intro .titre`/`.intro .description` = 0-2-0 pour battre l'aligne-
+   ment gauche par défaut du Heading/Text (`.align-left`, 0-1-0) et le
+   `.text{margin:0}` (cf. [[studio-songe-css-text-margin-piege]]).
+   `text-indent` = compensation du centrage optique des capitales aérées
+   (même technique que `.section.align-center` du composant Heading). */
+@media (max-width: 767px) {
+  .intro .titre {
+    text-align: center;
+    text-indent: var(--ss-tracking-caps);
+  }
+  .intro .description {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* =============================================================
+   Bascule bureau (≥ 768px) — deux colonnes, gauche collante.
+   ============================================================= */
+@media (min-width: 768px) {
+  .layout {
+    --approche-carte-top: 30%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ss-space-8);
+    align-items: start;
+  }
+
+  .intro {
+    position: sticky;
+    top: 30%;
+  }
+}

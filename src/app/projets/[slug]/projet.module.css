@@ -1,0 +1,240 @@
+/* =============================================================
+   Cas client (page réalisation) — TEMPLATE. Porté du wireframe Relume.
+   Mobile-first. Breakpoints DS : sm 640 / md 768 / lg 1024.
+   Cadres image = filet sauge signature (comme le Hero / ProjectCard).
+   ============================================================= */
+
+.page {
+  overflow-x: clip;
+}
+
+/* ---------- Cadre image (filet sauge + média arrondi) ---------- */
+.frame {
+  margin: 0;
+  padding: var(--ss-space-2);
+  border: var(--ss-line-weight) solid var(--ss-color-line);
+  border-radius: var(--ss-radius-lg);
+}
+
+.media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ss-radius-lg);
+  background: var(--ss-color-surface);
+}
+
+.photo,
+.placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  background: linear-gradient(
+    155deg,
+    var(--ss-palette-gris) 0%,
+    var(--ss-palette-terracotta-050) 100%
+  );
+}
+
+/* ---------- Header ---------- */
+/* Rapproche le H1 de la première photo : réduit le padding-bas du Header et le
+   padding-haut de l'Aperçu. `[class]` = spécificité 0-2-0 pour battre le
+   `.spacing-lg` du composant Section. */
+.header[class] {
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.apercuSection[class] {
+  padding-top: 0;
+}
+
+.headerInner {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.retour {
+  display: inline-block;
+  margin-bottom: var(--ss-space-6);
+  font-size: 0.875rem;
+  color: var(--ss-color-text-muted);
+  text-decoration: none;
+}
+
+.retour:hover {
+  color: var(--ss-color-text);
+}
+
+.titre {
+  margin-bottom: var(--ss-space-5);
+  text-wrap: balance;
+}
+
+/* Titre H1 en 2 parties (light + bold), comme la Hero. */
+.ligne {
+  display: block;
+}
+
+.fort {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+.headerInner .intro {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ss-space-2);
+  margin-top: var(--ss-space-6);
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Aperçu : couverture + méta + récit ---------- */
+.cover {
+  margin-bottom: var(--ss-space-9);
+}
+
+.cover .media {
+  aspect-ratio: 16 / 9;
+}
+
+.apercu {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--ss-space-6);
+  margin: 0 0 var(--ss-space-8);
+}
+
+.meta dt {
+  margin-bottom: var(--ss-space-1);
+  font-family: var(--ss-font-title);
+  font-weight: var(--ss-font-weight-bold);
+  font-size: 0.95rem;
+}
+
+.meta dd {
+  margin: 0;
+  color: var(--ss-color-text-muted);
+}
+
+.richtext {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-4);
+}
+
+/* ---------- Détail (Layout432) ---------- */
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ss-space-8);
+  align-items: start;
+}
+
+.detailMain .media {
+  aspect-ratio: 4 / 5;
+}
+
+.detailAside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.detailImages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--ss-space-4);
+  margin-bottom: var(--ss-space-6);
+  /* Chaque petite figure épouse son média carré (sinon le décalage `margin-top`
+     de la 2e étire l'autre via `align-items: stretch` → vide sous l'image). */
+  align-items: start;
+}
+
+.detailSmall .media {
+  aspect-ratio: 1 / 1;
+}
+
+/* Décalage façon Relume (2e image plus basse). */
+.detailImages figure:last-child {
+  margin-top: var(--ss-space-6);
+}
+
+.detailText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-4);
+}
+
+/* ---------- Témoignage ---------- */
+.temoignageSection {
+  background: var(--ss-palette-terracotta);
+  color: #fff;
+}
+
+.temoignage {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.citation {
+  margin: 0 0 var(--ss-space-6);
+  font-family: var(--ss-font-title);
+  font-weight: var(--ss-font-weight-bold);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.client {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-1);
+}
+
+.clientNom {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+.clientRole {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Bascules ---------- */
+@media (min-width: 768px) {
+  .meta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .detail {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ss-space-10, 4rem);
+  }
+
+  /* Full-bleed comme le H1 de la Hero : déborde le conteneur (centré sur le
+     viewport) pour respirer pareil. `.page { overflow-x: clip }` évite tout
+     scroll latéral. */
+  .titre {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+}

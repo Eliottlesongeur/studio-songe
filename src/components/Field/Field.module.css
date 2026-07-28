@@ -1,0 +1,32 @@
+.field {
+  display: grid;
+  gap: var(--ss-space-2);
+}
+
+.label {
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-medium);
+  font-size: var(--ss-size-body-sm);
+  color: var(--ss-color-text);
+}
+
+.required {
+  color: var(--ss-color-accent);
+  margin-left: 0.2em;
+}
+
+.hint {
+  margin: 0;
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-light);
+  font-size: var(--ss-size-caption);
+  color: var(--ss-color-text-muted);
+}
+
+.error {
+  margin: 0;
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-light);
+  font-size: var(--ss-size-caption);
+  color: var(--ss-color-accent);
+}

@@ -1,0 +1,129 @@
+/* =============================================================
+   APropos — présentation du studio (portée de Relume Layout27).
+   Mobile-first : texte puis image, empilés. Bureau (≥ 768px) : deux
+   colonnes centrées verticalement. Breakpoint DS : md = 768px.
+   ============================================================= */
+
+/* Marges verticales réduites de 20% vs le spacing lg du composant Section
+   (clamp(5rem, 10vw, 9rem) → ×0,8). Sélecteur `.section[id]` = spécificité
+   0-2-0 (non réductible par le minifieur) pour battre `.spacing-lg` (0-1-0). */
+.section[id] {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-8);
+}
+
+/* ---------- Colonne texte ---------- */
+.surtitre {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+}
+
+.titre {
+  margin-bottom: var(--ss-space-7);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.ligne {
+  display: block;
+}
+
+.fort {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+/* Spécificité 0-2-0 : bat `.text { margin: 0 }` du composant Text. */
+.texte .description {
+  max-width: 40rem;
+  margin-bottom: var(--ss-space-9);
+}
+
+/* ---------- Chiffres-clés ---------- */
+/* Toujours sur UNE ligne à 2 colonnes (un chiffre à gauche, un à droite),
+   y compris sur le plus petit mobile (demande Sasha). */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ss-space-6);
+  margin: 0;
+}
+
+.stat {
+  margin: 0;
+}
+
+.statNum {
+  margin-bottom: var(--ss-space-2);
+  font-family: var(--ss-font-title);
+  font-weight: var(--ss-font-weight-bold);
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  line-height: 1;
+  color: var(--ss-color-text);
+}
+
+.statDesc {
+  margin: 0;
+}
+
+/* ---------- Image ---------- */
+.media {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--ss-radius-lg);
+  background: var(--ss-color-surface);
+}
+
+.photo,
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  background: linear-gradient(
+    155deg,
+    var(--ss-palette-gris) 0%,
+    var(--ss-palette-terracotta-050) 100%
+  );
+}
+
+/* Mobile (< 768px) : titre + description centrés ; les 2 KPI sur une seule
+   ligne à 2 colonnes, chacun aligné à GAUCHE dans sa propre colonne (chiffre
+   + légende alignés ensemble, cf. demande Sasha — pas de report au bord droit
+   de la page). `.texte .titre`/`.texte .description` = 0-2-0 (bat l'alignement
+   gauche par défaut + `.text{margin:0}`). `text-indent` = centrage optique des
+   capitales aérées (cf. `.section.align-center` du Heading). */
+@media (max-width: 767px) {
+  .texte .titre {
+    text-align: center;
+    text-indent: var(--ss-tracking-caps);
+  }
+  .texte .description {
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+
+/* =============================================================
+   Bascule bureau (≥ 768px) — deux colonnes centrées.
+   ============================================================= */
+@media (min-width: 768px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ss-space-10, var(--ss-space-9));
+    align-items: center;
+  }
+}

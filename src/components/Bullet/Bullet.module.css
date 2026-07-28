@@ -1,0 +1,27 @@
+.bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  flex: none;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.bullet svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.tone-accent {
+  color: var(--ss-color-accent);
+}
+
+.tone-line {
+  color: var(--ss-color-line);
+}
+
+.tone-current {
+  color: currentColor;
+}

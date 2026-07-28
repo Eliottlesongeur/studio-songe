@@ -1,0 +1,164 @@
+/* =============================================================
+   Hero — porté de Relume Header 141 (composition 3 photos décalées).
+   Mobile-first. Photos en arche (signature Studio Songe).
+   ============================================================= */
+
+.hero {
+  position: relative; /* référence des filets décoratifs absolus */
+  overflow: hidden; /* les photos absolues ne débordent pas de la section */
+}
+
+/* ---------- Bloc de texte centré ---------- */
+.intro {
+  position: relative; /* au-dessus des filets */
+  z-index: 1;
+  margin-bottom: var(--ss-space-8);
+  text-align: center;
+}
+
+/* Le titre signature prend toute la largeur → chaque phrase sur une ligne
+   (2 lignes : light puis bold). Il wrappe naturellement sur petit écran. */
+.titre {
+  margin-bottom: var(--ss-space-5);
+  text-wrap: balance;
+}
+
+.surtitre {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+}
+
+.ligne {
+  display: block;
+}
+
+.fort {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+/* Sélecteur à 2 classes (spécificité 0-2-0) pour battre `.text { margin: 0 }`
+   du composant Text, sinon `margin-inline: auto` est écrasé et le bloc colle
+   à gauche (le shorthand `margin` réinitialise les marges inline). */
+/* Largeur calée sur la 2e ligne du titre en gras (« songés pour vous » en
+   capitales aérées) pour que le paragraphe s'aligne visuellement dessous. */
+.intro .description {
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.actions {
+  margin-top: var(--ss-space-6);
+}
+
+/* Titre signature sur petit écran : sous 768px il revient dans le conteneur
+   (pas de full-bleed) et le mot le plus long « INTÉRIEURS » en capitales très
+   aérées (`--ss-tracking-caps` = 0.4em) débordait dès ~400px. On resserre
+   l'interlettrage et on borne la taille pour qu'il tienne jusqu'à 320px, tout
+   en gardant une présence forte. Sélecteur `.intro .titre` (0-2-0) pour battre
+   le `.hero` (0-1-0) du composant Heading (taille + tracking). */
+@media (max-width: 767px) {
+  .intro .titre {
+    font-size: clamp(2rem, 6.4vw, 2.7rem);
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ---------- Composition des trois photos ---------- */
+.gallery {
+  position: relative;
+  z-index: 1; /* au-dessus des filets décoratifs */
+  display: flex;
+  justify-content: center;
+}
+
+/* Cadre = filet fin décalé qui suit l'arche (signature DS, cf. ProjectCard).
+   Structure 2 couches : ce cadre (border + padding) enveloppe le média. */
+.frame {
+  /* Liseré vert sauge (token « lignes fines décoratives » de la charte). */
+  --frame-color: var(--ss-color-line);
+  margin: 0;
+  padding: var(--ss-space-2);
+  border: var(--ss-line-weight) solid var(--frame-color, var(--ss-color-accent));
+  border-radius: var(--ss-radius-arch);
+}
+
+/* Média masqué en arche — même token que ProjectCard (dôme haut, bas carré). */
+.media {
+  position: relative; /* conteneur pour next/image `fill` */
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ss-radius-arch);
+  background: var(--ss-color-surface);
+}
+
+.photo,
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  /* Placeholder visible en attendant les vraies photos. */
+  background: linear-gradient(
+    155deg,
+    var(--ss-palette-gris) 0%,
+    var(--ss-palette-terracotta-050) 100%
+  );
+}
+
+/* Ratios portés par le média (le cadre s'y ajuste). */
+.center .media {
+  aspect-ratio: 1 / 1;
+}
+
+/* Format portrait de la ProjectCard du DS (plus fin et allongé). */
+.left .media,
+.right .media {
+  aspect-ratio: 3 / 4;
+}
+
+/* Positions dans la composition. */
+.center {
+  width: 50%;
+  margin: 0 10% 10%;
+  z-index: 1;
+}
+
+.left {
+  position: absolute;
+  bottom: -10%; /* ancrée 10% plus bas */
+  left: 10%; /* rapprochée de 10% vers le centre */
+  width: 28%; /* -30 % vs taille précédente */
+  z-index: 2;
+}
+
+.right {
+  position: absolute;
+  top: 0; /* ancrée 10% plus haut */
+  right: 10%; /* rapprochée de 10% vers le centre */
+  width: 28%; /* -30 % vs les autres cadres */
+  z-index: 2;
+}
+
+/* ---------- Bascules ---------- */
+@media (min-width: 768px) {
+  .intro {
+    margin-bottom: var(--ss-space-9);
+  }
+  .actions {
+    margin-top: var(--ss-space-7);
+  }
+
+  /* Le titre déborde le conteneur (full-bleed centré) pour que chaque ligne
+     — surtout « Des espaces intérieurs » en capitales aérées — tienne sur
+     une seule ligne. `.hero { overflow: hidden }` évite tout scroll latéral. */
+  .titre {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+}

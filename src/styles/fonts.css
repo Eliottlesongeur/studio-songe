@@ -1,0 +1,70 @@
+/* =============================================================
+   Studio Songe — Polices de marque
+   Police principale (titres)  : Garet (Light 300, Regular 400, Bold 700)
+   Police secondaire (corps)   : Work Sans (Light 300, Medium 500)
+   ============================================================= */
+
+@font-face {
+  font-family: "Garet";
+  src: url("/fonts/Garet-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Garet";
+  src: url("/fonts/Garet-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Garet";
+  src: url("/fonts/Garet-Light-Italic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Garet";
+  src: url("/fonts/Garet-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Garet";
+  src: url("/fonts/Garet-Bold-Italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fonts/WorkSans-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fonts/WorkSans-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fonts/WorkSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/fonts/WorkSans-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}

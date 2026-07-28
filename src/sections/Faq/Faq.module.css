@@ -1,0 +1,133 @@
+/* =============================================================
+   Faq — accordéon de questions fréquentes (porté de Relume Faq1).
+   Accordéon en <details>/<summary> natif. Mobile-first.
+   Breakpoint DS : md = 768px.
+   ============================================================= */
+
+/* Resserre l'espace avec la section À propos qui précède : padding-haut
+   réduit (la face basse garde le rythme lg). `.section[id]` = spécificité
+   0-2-0 pour battre `.spacing-lg` (0-1-0), non réductible par le minifieur. */
+.section[id] {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Colonne de lecture resserrée (Relume : container max-w-lg). */
+.wrap {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+/* ---------- En-tête centré ---------- */
+.intro {
+  margin-bottom: var(--ss-space-8);
+  text-align: center;
+}
+
+.surtitre {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+}
+
+.titre {
+  margin-bottom: var(--ss-space-5);
+  font-weight: var(--ss-font-weight-bold);
+  text-wrap: balance;
+}
+
+/* Spécificité 0-2-0 : bat `.text { margin: 0 }` du composant Text, sinon le
+   bloc perd ses marges auto et colle à gauche. */
+.intro .description {
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+/* ---------- Accordéon ---------- */
+.liste {
+  border-top: var(--ss-line-weight) solid var(--ss-color-border-soft);
+}
+
+.item {
+  border-bottom: var(--ss-line-weight) solid var(--ss-color-border-soft);
+}
+
+/* La ligne cliquable (question + chevron). */
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ss-space-4);
+  padding-block: var(--ss-space-4);
+  cursor: pointer;
+  list-style: none; /* retire la puce triangulaire par défaut */
+}
+
+.trigger::-webkit-details-marker {
+  display: none; /* idem, Safari */
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--ss-radius-xs);
+}
+
+.question {
+  font-family: var(--ss-font-title);
+  font-weight: var(--ss-font-weight-medium);
+  /* Se réduit légèrement sur les écrans étroits pour que les questions longues
+     (ex. « Travaillez-vous avec tous les budgets ? ») gardent le « ? » sur la
+     1re ligne ; revient à 1.125rem dès que la largeur le permet. Desktop
+     (≥768px) rétabli à 1.25rem plus bas. */
+  font-size: clamp(0.9rem, 4vw, 1.125rem);
+  line-height: 1.3;
+  color: var(--ss-color-text);
+}
+
+.icone {
+  flex-shrink: 0;
+  color: var(--ss-color-text-muted);
+  transition: transform var(--ss-duration) var(--ss-ease);
+}
+
+.item[open] .icone {
+  transform: rotate(180deg);
+}
+
+/* Réponse révélée. */
+.reponse {
+  padding-bottom: var(--ss-space-5);
+  max-width: 44rem;
+  white-space: pre-line; /* préserve les retours à la ligne (\n) des réponses */
+}
+
+/* ---------- Pied : relance contact ---------- */
+.footer {
+  max-width: 32rem;
+  margin-inline: auto;
+  margin-top: var(--ss-space-9);
+  text-align: center;
+}
+
+.actions {
+  margin-top: 0;
+}
+
+/* Le libellé du CTA peut être long (« Vous avez d'autres questions ? »). Le
+   composant Button impose `white-space: nowrap` (0-1-0) : sans garde-fou, il
+   déborde le conteneur sous ~400px et crée un scroll horizontal sur toute la
+   page. Spécificité 0-2-0 pour battre `.button`. */
+.actions .cta {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+/* ---------- Bascule bureau ---------- */
+@media (min-width: 768px) {
+  .trigger {
+    padding-block: var(--ss-space-5);
+  }
+  .question {
+    font-size: 1.25rem;
+  }
+}

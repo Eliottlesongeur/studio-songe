@@ -1,0 +1,25 @@
+/* Tracé signature du Hero — SVG redessiné par Eliott (repère 1720×1343 = la
+   section Hero, bloc des 3 photos centré et fixe à 883px).
+   Rendu à LARGEUR FIXE 1720px, CENTRÉ horizontalement (1px SVG = 1px écran) :
+   - le bloc photos du dessin retombe pile sur le bloc photos réel (tous deux
+     fixes et centrés) → les arches restent collées aux photos à TOUTE largeur ;
+   - les longs traits vers les bords dépassent la fenêtre et sont coupés net par
+     l'`overflow:hidden` de la section → ils « touchent » le bord à toute largeur ;
+   - top:0 → l'origine y=0 du dessin est calée sur le haut du Hero (sous la nav). */
+.bgPath {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1720px; /* largeur intrinsèque du dessin — NE PAS mettre en % (sinon les arches dérivent) */
+  transform: translateX(-50%);
+  z-index: 0; /* derrière le contenu du Hero (intro/gallery en z-index 1) */
+  color: var(--ss-color-line);
+  pointer-events: none;
+}
+
+.bgPath svg {
+  display: block;
+  width: 100%; /* = 1720px */
+  height: auto; /* ratio 1720:1343 préservé */
+  overflow: visible;
+}

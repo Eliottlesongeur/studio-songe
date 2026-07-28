@@ -1,0 +1,146 @@
+/* =============================================================
+   Navbar — porté de Relume Navbar 7 (sans méga-menu).
+   Mobile-first : toutes les règles de base d'abord, puis les
+   media queries. Breakpoint bureau : lg = 1024px (convention DS).
+   ============================================================= */
+
+.navbar {
+  width: 100%;
+  background: var(--ss-color-bg);
+  /* 1.5px pour matcher l'épaisseur du trait des filets décoratifs (Decor). */
+  border-bottom: 1.5px solid var(--ss-color-line);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ss-space-4);
+  min-height: 64px; /* Relume min-h-16 */
+  max-width: var(--ss-container);
+  margin-inline: auto;
+  padding-inline: var(--ss-gutter);
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+/* ---------- Navigation bureau : masquée en mobile ---------- */
+.desktop {
+  display: none;
+  align-items: center;
+  gap: var(--ss-space-7);
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--ss-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Hamburger : visible en mobile ---------- */
+.burger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  margin-right: -8px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ss-color-text);
+}
+
+.burgerLine {
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  border-radius: var(--ss-radius-pill);
+  transition:
+    transform var(--ss-duration-fast) var(--ss-ease),
+    opacity var(--ss-duration-fast) var(--ss-ease);
+}
+
+/* Croix à l'ouverture */
+.burger[data-open="true"] .burgerLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger[data-open="true"] .burgerLine:nth-child(2) {
+  opacity: 0;
+}
+.burger[data-open="true"] .burgerLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Panneau mobile déroulant ---------- */
+.panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--ss-color-bg);
+  border-bottom: 1px solid var(--ss-color-border-soft);
+  box-shadow: var(--ss-shadow-md);
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--ss-duration) var(--ss-ease),
+    opacity var(--ss-duration) var(--ss-ease),
+    visibility var(--ss-duration) var(--ss-ease);
+}
+
+.panel[data-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.panelNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-2);
+  max-width: var(--ss-container);
+  margin-inline: auto;
+  padding: var(--ss-space-4) var(--ss-gutter) var(--ss-space-6);
+}
+
+.panelLink {
+  padding-block: var(--ss-space-3);
+}
+
+/* =============================================================
+   Bascule bureau (≥ 1024px) — placée APRÈS toutes les règles
+   de base pour que les surcharges l'emportent (mobile-first).
+   ============================================================= */
+@media (min-width: 768px) {
+  .inner {
+    min-height: 72px; /* Relume md:min-h-18 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop {
+    display: flex;
+  }
+  .burger {
+    display: none;
+  }
+  .panel {
+    display: none;
+  }
+}

@@ -1,0 +1,131 @@
+.button {
+  --_radius: var(--ss-radius-sm);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ss-space-3);
+
+  font-family: var(--ss-font-title);
+  font-weight: var(--ss-font-weight-light);
+  text-transform: uppercase;
+  letter-spacing: var(--ss-tracking-caps-sm);
+  text-decoration: none;
+  white-space: nowrap;
+
+  border: var(--ss-border-weight) solid transparent;
+  border-radius: var(--_radius);
+  cursor: pointer;
+  transition:
+    background-color var(--ss-duration) var(--ss-ease),
+    border-color var(--ss-duration) var(--ss-ease),
+    color var(--ss-duration) var(--ss-ease),
+    transform var(--ss-duration-fast) var(--ss-ease);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------------- Tailles ---------------- */
+.sm {
+  font-size: var(--ss-size-caption);
+  padding: var(--ss-space-2) var(--ss-space-4);
+}
+.md {
+  font-size: var(--ss-size-body-sm);
+  padding: var(--ss-space-3) var(--ss-space-6);
+}
+.lg {
+  font-size: var(--ss-size-body);
+  padding: var(--ss-space-4) var(--ss-space-7);
+}
+
+/* ---------------- Variantes ---------------- */
+
+/* Primaire — terracotta plein, texte ivoire (CTA "DÉCOUVRIR" p.21).
+   Texte en Garet Regular (400) : plus appuyé que le Light des autres boutons. */
+.primary {
+  background: var(--ss-color-accent);
+  color: var(--ss-color-on-accent);
+  border-color: var(--ss-color-accent);
+  font-weight: var(--ss-font-weight-regular);
+}
+.primary:hover:not(:disabled) {
+  background: var(--ss-color-accent-hover);
+  border-color: var(--ss-color-accent-hover);
+}
+
+/* Secondaire — contour terracotta, fond transparent */
+.secondary {
+  background: transparent;
+  color: var(--ss-color-accent);
+  border-color: var(--ss-color-accent);
+}
+.secondary:hover:not(:disabled) {
+  background: var(--ss-color-accent-soft);
+}
+
+/* Fantôme — texte seul, discret */
+.ghost {
+  background: transparent;
+  color: var(--ss-color-text);
+  border-color: transparent;
+}
+.ghost:hover:not(:disabled) {
+  color: var(--ss-color-accent);
+}
+
+/* ---------------- Sur fond foncé (sections brun) ---------------- */
+.onDark.secondary {
+  color: var(--ss-color-text-inverse);
+  border-color: var(--ss-color-on-dark-border);
+}
+.onDark.secondary:hover:not(:disabled) {
+  background: var(--ss-color-on-dark-fill);
+  border-color: var(--ss-color-text-inverse);
+}
+.onDark.ghost {
+  color: var(--ss-color-text-inverse);
+}
+
+/* ---------------- Bouton icône carré (flèche → p.21/22) ---------------- */
+.iconOnly {
+  gap: 0;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+}
+.iconOnly.sm {
+  width: 2.25rem;
+}
+.iconOnly.md {
+  width: 3rem;
+}
+.iconOnly.lg {
+  width: 3.5rem;
+}
+
+/* Pleine largeur (mobile, formulaires) */
+.block {
+  width: 100%;
+}
+
+/* Icône : hérite de la couleur du texte, taille alignée sur la police */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.icon svg {
+  width: 1.15em;
+  height: 1.15em;
+  display: block;
+}

@@ -1,0 +1,53 @@
+/* Style de contrôle partagé par Input et Textarea (charte : champs sobres,
+   coins doux radius-md, filet discret, focus sauge, erreur terracotta). */
+
+.control {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-light);
+  font-size: var(--ss-size-body);
+  line-height: var(--ss-leading-normal);
+  color: var(--ss-color-text);
+  background: var(--ss-color-bg);
+  border: 1px solid var(--ss-color-border-soft);
+  border-radius: var(--ss-radius-md);
+  padding: 0.75rem 1rem;
+  appearance: none;
+  transition:
+    border-color var(--ss-duration) var(--ss-ease),
+    box-shadow var(--ss-duration) var(--ss-ease);
+}
+
+.control::placeholder {
+  color: var(--ss-color-text-muted);
+  opacity: 0.7;
+}
+
+.control:hover:not(:disabled):not(:focus) {
+  border-color: var(--ss-color-border);
+}
+
+.control:focus {
+  outline: none;
+  border-color: var(--ss-color-line);
+  box-shadow: 0 0 0 3px var(--ss-color-focus-ring);
+}
+
+.control:disabled {
+  background: var(--ss-color-surface);
+  color: var(--ss-color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+/* État erreur */
+.invalid,
+.invalid:hover {
+  border-color: var(--ss-color-accent);
+}
+
+.invalid:focus {
+  border-color: var(--ss-color-accent);
+  box-shadow: 0 0 0 3px var(--ss-color-error-ring);
+}

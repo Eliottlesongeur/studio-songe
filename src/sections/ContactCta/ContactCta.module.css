@@ -1,0 +1,140 @@
+/* =============================================================
+   ContactCta — appel à l'action final, sans fond plein. Le motif signature
+   (arche) de la charte est posé en absolu au centre de la section, le
+   contenu superposé au-dessus.
+
+   Principe : le SVG porte la forme (viewBox), le CSS pilote sa taille
+   (clamp) et son placement. La section est `relative` + `overflow:hidden`
+   → les grands filets extérieurs du motif sont contenus dans la section.
+   Mobile-first. Breakpoint DS : md = 768px.
+   ============================================================= */
+
+.section {
+  /* Le motif ENCADRE le contenu. On part de la largeur du motif (plafonnée au
+     viewport), puis on en DÉDUIT la largeur du contenu en réservant une
+     gouttière garantie de chaque côté → le texte ne peut jamais toucher les
+     filets, quelle que soit la largeur d'écran. */
+  --motif-w: min(92vw, 847px);
+  --gutter: clamp(2rem, 6vw, 9.5rem);
+  --content-max: min(540px, calc(var(--motif-w) - 2 * var(--gutter)));
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(680px, 78svh, 860px);
+  overflow: hidden;
+}
+
+/* Padding propre (bat le `spacing-lg` du composant Section : `.section[id]`
+   = spécificité 0-2-0, non réductible par le minifieur). */
+.section[id] {
+  padding-block: clamp(80px, 10vw, 140px);
+  padding-inline: 24px;
+}
+
+/* ---------- Motif signature (fond, centré) ---------- */
+/* Le motif SUIT le contenu : sa largeur = largeur du contenu (--content-max)
+   + une gouttière fluide de chaque côté → la marge autour du texte reste
+   constante quand tout scale. Plafonné à 94vw pour ne jamais dépasser
+   l'écran. La variable est lue en inline (`style` du composant Motif, qui
+   force un width inline) et reste pilotable ici via media queries.
+   Hauteur : suit le ratio (svg width:100% / height:auto). */
+.motif,
+.motifMobile {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  pointer-events: none;
+}
+
+/* Motif paysage (desktop / tablette ≥ 640px). */
+.motif {
+  --ss-cta-motif-w: var(--motif-w);
+}
+
+/* Motif portrait (< 768px) — masqué par défaut, activé dans la media query. */
+.motifMobile {
+  display: none;
+}
+
+/* ---------- Contenu (au-dessus du motif) ---------- */
+.content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, var(--content-max));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.texte {
+  max-width: 32rem;
+}
+
+.titre {
+  margin-bottom: var(--ss-space-5);
+  font-weight: var(--ss-font-weight-bold);
+  text-wrap: balance;
+}
+
+/* Resserre le tracking capitales du hero (spécificité 0-3-0 pour battre
+   `.hero.align-center`). */
+.section .content .titre {
+  letter-spacing: var(--ss-tracking-caps-sm);
+  text-indent: var(--ss-tracking-caps-sm);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ss-space-4);
+  margin-top: var(--ss-space-7);
+}
+
+/* ---------- Mobile (< 768px) : contenu verticalisé + motif portrait ----------
+   Sous 768px, on resserre --content-max → le titre tombe en ~3 lignes
+   (contenu portrait), on masque le motif paysage et on active le motif
+   portrait, dimensionné par la même logique « suit le contenu ». */
+/* Bascule à 640px (et non 768px) : au-delà, le motif portrait devenait trop
+   haut et étroit alors que le contenu restait bloqué en colonne étroite. */
+@media (max-width: 639.98px) {
+  /* Motif portrait — même logique : le motif d'abord, le contenu déduit. */
+  .section {
+    --motif-w: min(92vw, 480px);
+    --gutter: clamp(2rem, 8vw, 3rem);
+    --content-max: min(320px, calc(var(--motif-w) - 2 * var(--gutter)));
+  }
+
+  .section[id] {
+    min-height: clamp(560px, 82svh, 680px);
+    padding-inline: 20px;
+  }
+
+  .motif {
+    display: none;
+  }
+
+  .motifMobile {
+    display: block;
+    --ss-cta-motif-mobile-w: var(--motif-w);
+  }
+
+  /* Le motif a un ratio fixe : sa hauteur découle de sa largeur, elle-même
+     plafonnée au viewport. Sur petit écran, le titre en `hero` (3 lignes très
+     hautes) rendait le contenu PLUS HAUT que le motif → débordement sur les
+     filets. On descend le titre à l'échelle « section » et on resserre le
+     rythme vertical pour que le contenu tienne dans le motif. */
+  .section .content .titre {
+    font-size: calc(var(--ss-fluid-unit) * 2.125);
+  }
+
+  .actions {
+    margin-top: var(--ss-space-5);
+  }
+}

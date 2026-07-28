@@ -1,0 +1,65 @@
+.text {
+  margin: 0;
+  font-family: var(--ss-font-body);
+  color: var(--ss-color-text);
+  font-weight: var(--ss-font-weight-light);
+  line-height: var(--ss-leading-normal);
+}
+
+/* --- Variantes de taille / rôle --- */
+.body-lg {
+  font-size: var(--ss-size-body-lg);
+}
+.body {
+  font-size: var(--ss-size-body);
+}
+.body-sm {
+  font-size: var(--ss-size-body-sm);
+}
+.caption {
+  font-size: var(--ss-size-caption);
+  line-height: var(--ss-leading-snug);
+}
+
+/* Label : petites capitales aérées (nav, sur-titres, cartes projet) */
+.label {
+  font-family: var(--ss-font-title);
+  font-size: var(--ss-size-body-sm);
+  font-weight: var(--ss-font-weight-light);
+  text-transform: uppercase;
+  letter-spacing: var(--ss-tracking-caps-sm);
+  line-height: var(--ss-leading-snug);
+}
+
+/* --- Graisses (Work Sans : Light / Medium) --- */
+.weight-light {
+  font-weight: var(--ss-font-weight-light);
+}
+.weight-medium {
+  font-weight: var(--ss-font-weight-medium);
+}
+
+/* --- Couleurs --- */
+.tone-default {
+  color: var(--ss-color-text);
+}
+.tone-muted {
+  color: var(--ss-color-text-muted);
+}
+.tone-inverse {
+  color: var(--ss-color-text-inverse);
+}
+.tone-accent {
+  color: var(--ss-color-accent);
+}
+
+/* --- Alignement --- */
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}

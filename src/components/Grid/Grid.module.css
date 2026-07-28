@@ -1,0 +1,8 @@
+.grid {
+  display: grid;
+}
+
+/* Cellule : min-width 0 évite le débordement des contenus (texte, images). */
+.item {
+  min-width: 0;
+}

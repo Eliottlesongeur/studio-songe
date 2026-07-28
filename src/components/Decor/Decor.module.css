@@ -1,0 +1,20 @@
+/* Filets décoratifs Studio Songe — couleur sauge par défaut, recolorable
+   via `color` (les tracés sont en currentColor). Purement décoratifs. */
+.decor {
+  display: inline-block;
+  color: var(--ss-color-line);
+  line-height: 0;
+  pointer-events: none;
+}
+
+.decor svg {
+  display: block;
+}
+
+.dot {
+  display: inline-block;
+  border-radius: var(--ss-radius-pill);
+  background: currentColor;
+  color: var(--ss-color-line);
+  pointer-events: none;
+}

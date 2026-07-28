@@ -1,0 +1,121 @@
+/* Link — chaque variante règle --link-color / --link-color-hover ;
+   .onDark surcharge ces deux variables pour les fonds foncés. */
+
+.link {
+  color: var(--link-color);
+  cursor: pointer;
+  transition:
+    color var(--ss-duration) var(--ss-ease),
+    text-decoration-color var(--ss-duration) var(--ss-ease);
+}
+
+.link:hover {
+  color: var(--link-color-hover);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--ss-radius-xs);
+}
+
+/* Inline — souligné fin permanent, trait + texte terracotta au survol.
+   Le trait suit currentColor, donc il vire au terracotta avec le texte. */
+.inline {
+  --link-color: var(--ss-color-text);
+  --link-color-hover: var(--ss-color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: currentColor;
+}
+
+/* Nav — capitales aérées, pas de trait, brun atténué → brun plein.
+   Puce arche signature révélée à gauche au survol / focus. */
+.nav {
+  --link-color: var(--ss-color-text-muted);
+  --link-color-hover: var(--ss-color-text);
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-medium);
+  font-size: var(--ss-size-body-sm);
+  letter-spacing: var(--ss-tracking-caps-sm);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* Puce arche terracotta : masquée, glisse depuis la gauche au survol/focus. */
+.navBullet {
+  max-width: 0;
+  margin-right: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(-0.25em);
+  transition:
+    max-width var(--ss-duration) var(--ss-ease),
+    margin-right var(--ss-duration) var(--ss-ease),
+    opacity var(--ss-duration) var(--ss-ease),
+    transform var(--ss-duration) var(--ss-ease);
+}
+
+.nav:hover .navBullet,
+.nav:focus-visible .navBullet {
+  max-width: 1em;
+  margin-right: var(--ss-space-2);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Quiet — listes / pied de page. */
+.quiet {
+  --link-color: var(--ss-color-text-muted);
+  --link-color-hover: var(--ss-color-text);
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-light);
+  font-size: var(--ss-size-body-sm);
+  text-decoration: none;
+}
+
+/* Standalone — lien-action avec flèche. */
+.standalone {
+  --link-color: var(--ss-color-accent);
+  --link-color-hover: var(--ss-color-accent-hover);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ss-space-2);
+  font-family: var(--ss-font-body);
+  font-weight: var(--ss-font-weight-medium);
+  font-size: var(--ss-size-body-sm);
+  text-decoration: none;
+}
+
+.arrow {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  transition: transform var(--ss-duration) var(--ss-ease);
+}
+
+.standalone:hover .arrow {
+  transform: translateX(3px);
+}
+
+.external {
+  width: 0.85em;
+  height: 0.85em;
+  flex: none;
+  margin-left: 0.15em;
+  vertical-align: baseline;
+}
+
+/* Fonds foncés — surcharge les couleurs (spécificité .link.onDark). */
+.link.onDark {
+  --link-color: var(--ss-color-on-dark);
+  --link-color-hover: var(--ss-color-text-inverse);
+}
+
+.link.onDark.standalone {
+  --link-color: var(--ss-color-text-inverse);
+  --link-color-hover: var(--ss-color-on-dark-hover);
+}

@@ -1,0 +1,47 @@
+/* Logo — signature visuelle Studio Songe.
+   Les SVG utilisent 3 variables scoped, mappées ici sur les tokens :
+   --logo-ink   : traits & texte du logo (brun)
+   --logo-accent: ligne signature (sauge)
+   --logo-fill  : remplissage de la voile (gris) */
+
+.logo {
+  --logo-ink: var(--ss-color-text);
+  --logo-accent: var(--ss-color-line);
+  --logo-fill: var(--ss-color-surface);
+
+  display: inline-flex;
+  align-items: center;
+  color: var(--ss-color-text);
+  line-height: 0;
+}
+
+.logo svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* Monochrome (charte : mono sur fond clair OU foncé) — tout suit
+   la couleur courante. Poser `color: ivoire` sur fond foncé,
+   `color: brun` sur fond clair. */
+.mono {
+  --logo-ink: currentColor;
+  --logo-accent: currentColor;
+  --logo-fill: currentColor;
+}
+
+/* Lien (retour accueil) */
+a.logo {
+  text-decoration: none;
+  transition: opacity var(--ss-duration) var(--ss-ease);
+  border-radius: var(--ss-radius-xs);
+}
+
+a.logo:hover {
+  opacity: 0.82;
+}
+
+a.logo:focus-visible {
+  outline: 2px solid var(--ss-color-focus);
+  outline-offset: 4px;
+}

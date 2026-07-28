@@ -1,0 +1,163 @@
+/* =============================================================
+   Realisations — porté de Relume Layout408 (panneaux empilés en sticky,
+   texte/image alternés). Mobile-first : panneaux empilés verticalement.
+   Bureau (≥ 768px) : chaque panneau se fige (sticky) et le suivant le
+   recouvre. Breakpoint DS : md = 768px.
+   ============================================================= */
+
+/* Transitions resserrées. `.section[id]` = spécificité 0-2-0 pour battre
+   `.spacing-lg` (0-1-0), non réductible par le minifieur.
+   - haut : joint avec Process (un peu plus d'air, demande Sasha)
+   - bas : joint avec À propos (serré) */
+.section[id] {
+  padding-top: clamp(4.25rem, 7vw, 6rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* ---------- En-tête centré ---------- */
+.intro {
+  margin-bottom: var(--ss-space-8);
+  text-align: center;
+}
+
+.surtitre {
+  display: block;
+  margin-bottom: var(--ss-space-3);
+}
+
+.titre {
+  margin-bottom: var(--ss-space-5);
+  text-wrap: balance;
+}
+
+.ligne {
+  display: block;
+}
+
+.fort {
+  font-weight: var(--ss-font-weight-bold);
+}
+
+/* Spécificité 0-2-0 : bat `.text { margin: 0 }` du composant Text, sinon le
+   bloc perd ses marges auto et colle à gauche. */
+.intro .description {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+/* ---------- Pile de panneaux ---------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ss-space-6);
+}
+
+.panneau {
+  display: grid;
+  /* minmax(0, 1fr) : la piste ne peut pas dépasser la largeur du panneau. Avec
+     `1fr` (= minmax(auto, 1fr)), le min-content du contenu (CTA `nowrap`) forçait
+     la piste à ~306px sous 320px → contenu/image rognés par l'overflow:hidden. */
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--ss-color-bg);
+  border: var(--ss-line-weight) solid var(--ss-color-border-soft);
+  border-radius: var(--ss-radius-lg);
+  box-shadow: var(--ss-shadow-md);
+}
+
+.texte {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--ss-space-6);
+}
+
+/* Spécificité 0-2-0 : bat `.text { margin: 0 }` du composant Text, sinon la
+   marge sous le label est écrasée (aucun espace). */
+.texte .panneauTag {
+  display: block;
+  margin-bottom: var(--ss-space-6);
+}
+
+.panneauTitre {
+  margin-bottom: var(--ss-space-4);
+  line-height: 1.2;
+}
+
+.actions {
+  margin-top: var(--ss-space-6);
+}
+
+/* CTA ghost = lien-texte : padding horizontal supprimé pour que le libellé
+   s'aligne à gauche avec le label, le titre et le corps. Spécificité 0-2-0
+   pour battre le padding de taille du bouton (`.md`). */
+.actions .cta {
+  padding-inline: 0;
+  /* Autorise le retour à la ligne du libellé : `Button` impose `nowrap`, ce qui
+     forçait la largeur mini du panneau au-delà du conteneur sous 320px. */
+  white-space: normal;
+  text-align: left;
+}
+
+/* ---------- Média ---------- */
+.media {
+  margin: 0; /* annule la marge par défaut du <figure> (marge blanche autour) */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--ss-color-surface);
+}
+
+.photo,
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  background: linear-gradient(
+    155deg,
+    var(--ss-palette-gris) 0%,
+    var(--ss-palette-terracotta-050) 100%
+  );
+}
+
+/* =============================================================
+   Bascule bureau (≥ 768px) — empilement collant + 2 colonnes alternées.
+   ============================================================= */
+@media (min-width: 768px) {
+  .stack {
+    gap: 0; /* l'espacement passe par la marge de chaque panneau collant */
+  }
+
+  .panneau {
+    position: sticky;
+    top: 10%;
+    height: 80vh;
+    margin-bottom: 10vh;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .texte {
+    padding: var(--ss-space-9);
+  }
+
+  /* Image sur toute la hauteur du panneau. */
+  .media {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  /* Panneaux impairs : image à gauche, texte à droite. */
+  .reverse .texte {
+    order: 2;
+  }
+  .reverse .media {
+    order: 1;
+  }
+}
