@@ -18,10 +18,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/projets/hero/renovation-appartement-dinard-couloirs.jpg",
-        width: 1920,
-        height: 1279,
-        alt: "Cuisine ouverte sur mur bleu nuit avec îlot en bois, rénovation d'appartement à Dinard par Studio Songe",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Studio Songe — Architecture & design d'intérieur",
       },
     ],
   },
