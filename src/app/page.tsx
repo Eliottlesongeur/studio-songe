@@ -5,6 +5,7 @@ import { Realisations } from "@/sections/Realisations/Realisations";
 import { APropos } from "@/sections/APropos/APropos";
 import { Faq } from "@/sections/Faq/Faq";
 import { ContactCta } from "@/sections/ContactCta/ContactCta";
+import { StructuredData } from "./StructuredData";
 
 /**
  * Home (one-page). Les sections sont ajoutées ici au fur et à mesure
@@ -13,6 +14,8 @@ import { ContactCta } from "@/sections/ContactCta/ContactCta";
 export default function Home() {
   return (
     <main>
+      {/* Données structurées Schema.org (SEO local) — voir StructuredData.tsx. */}
+      <StructuredData />
       {/* Le décor « tracé signature » vit désormais DANS la section Hero
           (ancré à ses bords, clippé par son overflow) — voir Hero.tsx. */}
       <Hero />
