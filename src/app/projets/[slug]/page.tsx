@@ -24,7 +24,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const projet = getProjet(slug);
   if (!projet) return {};
-  return { title: projet.titre, description: projet.resume };
+  return {
+    title: projet.titre,
+    description: projet.resume,
+    alternates: { canonical: `/projets/${slug}` },
+  };
 }
 
 const LOREM =

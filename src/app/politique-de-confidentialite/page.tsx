@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: `Politique de confidentialité du site ${site.nom} — données collectées, finalités et droits (RGPD).`,
   robots: { index: false, follow: true },
+  alternates: { canonical: "/politique-de-confidentialite" },
 };
 
 const { editeur, hebergeur, confidentialite, derniereMaj } = legal;

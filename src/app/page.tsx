@@ -4,8 +4,14 @@ import { Approche } from "@/sections/Approche/Approche";
 import { Realisations } from "@/sections/Realisations/Realisations";
 import { APropos } from "@/sections/APropos/APropos";
 import { Faq } from "@/sections/Faq/Faq";
+import type { Metadata } from "next";
 import { ContactCta } from "@/sections/ContactCta/ContactCta";
 import { StructuredData } from "./StructuredData";
+
+/** Canonical de la home (résolu contre `metadataBase` = https://studiosonge.fr). */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * Home (one-page). Les sections sont ajoutées ici au fur et à mesure

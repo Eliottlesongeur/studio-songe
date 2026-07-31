@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Mentions légales",
   description: `Mentions légales du site ${site.nom} — éditeur, hébergeur et informations légales.`,
   robots: { index: false, follow: true },
+  alternates: { canonical: "/mentions-legales" },
 };
 
 const { editeur, directeurPublication, hebergeur, registrar, derniereMaj } = legal;
