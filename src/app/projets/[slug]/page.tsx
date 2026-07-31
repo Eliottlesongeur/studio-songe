@@ -108,7 +108,7 @@ export default async function ProjetPage({ params }: Params) {
               </div>
               <div>
                 <dt>Surface</dt>
-                <dd>— m²</dd>
+                <dd>{projet.surface ? `${projet.surface} m²` : "— m²"}</dd>
               </div>
             </dl>
             <div className={styles.richtext}>

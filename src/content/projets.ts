@@ -30,6 +30,8 @@ export interface Projet {
   titreBold?: string;
   lieu: string;
   annee: number;
+  /** Surface du projet en m² (méta Aperçu). Optionnel → affiche « — m² » si absent. */
+  surface?: number;
   /** Catégorie pour les filtres (ex. "Résidentiel", "Commerce"). */
   categorie: string;
   /** Accroche courte affichée sur la carte et en tête de page. */
@@ -61,6 +63,7 @@ export const projets: Projet[] = [
     titreBold: "Fontainebleau",
     lieu: "Fontainebleau",
     annee: 2025,
+    surface: 32, // provisoire (véranda / jardin d'hiver) — à remplacer par la vraie valeur
     categorie: "Résidentiel",
     resume: "", // sous-titre retiré pour ce projet (rendu conditionnel)
     apercu: [
@@ -109,6 +112,7 @@ export const projets: Projet[] = [
     titreBold: "Coulommiers",
     lieu: "Coulommiers",
     annee: 2025,
+    surface: 145, // provisoire (maison rénovée) — à remplacer par la vraie valeur
     categorie: "Résidentiel",
     resume: "", // sous-titre retiré par défaut (rendu conditionnel) — à remplir si besoin
     apercu: [
@@ -156,6 +160,7 @@ export const projets: Projet[] = [
     titreBold: "Dinard",
     lieu: "Dinard",
     annee: 2026,
+    surface: 42, // provisoire (petit appartement) — à remplacer par la vraie valeur
     categorie: "Résidentiel",
     resume: "", // sous-titre retiré par défaut (rendu conditionnel)
     apercu: [
@@ -202,6 +207,7 @@ export const projets: Projet[] = [
     titreBold: "verrière",
     lieu: "En cours",
     annee: 2026,
+    surface: 58, // provisoire (verrière étroite réhabilitée en bureaux) — à remplacer par la vraie valeur
     categorie: "Tertiaire", // ex-"Résidentiel" — projet = transformation en bureaux (à confirmer)
     resume: "", // sous-titre retiré par défaut (rendu conditionnel)
     apercu: [
