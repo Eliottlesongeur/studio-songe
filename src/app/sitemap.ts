@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${base}/projets/hero/renovation-maison-fontainebleau-verriere.jpg`,
       ],
     },
-    { url: `${base}/projets`, priority: 0.8 },
     ...projets.map((p) => ({
       url: `${base}/projets/${p.slug}`,
       priority: 0.6,
