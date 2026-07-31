@@ -66,7 +66,10 @@ export function Footer() {
 
         <div className={styles.bottom}>
           <Text variant="body-sm" tone="muted" className={styles.copy}>
-            © {annee} {site.nom}. Tous droits réservés.
+            © {annee} {site.nom}. Tous droits réservés. Développé par{" "}
+            <Link href="https://webdiiv.com" variant="quiet" external>
+              Webdiiv
+            </Link>
           </Text>
           <ul className={styles.legal}>
             {site.legalLinks.map((link) => (
